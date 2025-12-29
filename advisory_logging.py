@@ -1,7 +1,8 @@
 from rich.console import Console
+import sys
 from rich.table import Table
 
-console = Console()
+console = Console(file=sys.stderr)
 
 
 def log_advisory(input, response):

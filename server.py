@@ -19,12 +19,22 @@ def preflight_advice(input: AdvisoryInput):
     return response
 
 @mcp.tool()
-def record_outcome(tool_sequence: list[str], outcome: str):
-    """
-    Demo-only: record the outcome of a tool sequence.
-    """
-    memory.record(tool_sequence, outcome)
+def record_outcome(
+    task_description: str,
+    tool_sequence: list[str],
+    outcome: str,
+    domain: str | None = None,
+    constraints: list[str] | None = None,
+):
+    memory.record(
+        task_description=task_description,
+        tools=tool_sequence,
+        outcome=outcome,
+        domain=domain,
+        constraints=constraints,
+    )
     return {"status": "recorded"}
+
 
 
 if __name__ == "__main__":
