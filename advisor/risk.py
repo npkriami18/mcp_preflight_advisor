@@ -7,7 +7,7 @@ def risk_warnings_for_tool(
     tool_name: str,
     memory: InMemoryAdvisoryMemory,
 ) -> list[AdvisoryWarning]:
-    stats = memory.stats_for(tool_name)
+    stats = memory.tool_stats(tool_name)
 
     successes = stats[SUCCESS]
     failures = stats[FAILURE]

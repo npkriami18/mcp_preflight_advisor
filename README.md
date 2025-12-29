@@ -96,3 +96,14 @@ Future work may include:
 - configurable policies
 - production-grade persistence
 
+## Failure Injection Example
+
+To demonstrate uncertainty handling, the advisor can be seeded
+with repeated failures for a given tool sequence.
+
+When the same task is evaluated again:
+- confidence is reduced
+- warnings are elevated
+- negative history is surfaced explicitly
+
+This behavior is deterministic and explainable.

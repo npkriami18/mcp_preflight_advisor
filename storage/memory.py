@@ -32,7 +32,7 @@ class InMemoryAdvisoryMemory:
         for tool in tools:
             self.tool_stats[tool][outcome] += 1
 
-    def stats_for(self, tool: str) -> Dict[str, int]:
+    def tool_stats(self, tool: str) -> Dict[str, int]:
         return self.tool_stats.get(
             tool,
             {SUCCESS: 0, FAILURE: 0, UNKNOWN: 0},

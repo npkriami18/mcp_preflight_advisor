@@ -27,7 +27,7 @@ def adjust_confidence_with_history(
     suggestion: ToolSuggestion,
     memory: InMemoryAdvisoryMemory,
 ) -> float:
-    stats = memory.stats_for(suggestion.tool_name)
+    stats = memory.tool_stats(suggestion.tool_name)
 
     successes = stats[SUCCESS]
     failures = stats[FAILURE]
