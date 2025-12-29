@@ -8,8 +8,10 @@ from advisor.scoring import (
 from advisor.risk import risk_warnings_for_tool
 from advisor.similarity import find_similar_tasks
 from storage.memory import InMemoryAdvisoryMemory
+from storage.sqlite_memory import SQLiteAdvisoryMemory
 
-memory = InMemoryAdvisoryMemory()
+memory = SQLiteAdvisoryMemory()
+
 
 
 def advise(input: AdvisoryInput) -> AdvisoryResponse:

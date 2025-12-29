@@ -11,3 +11,5 @@
 .mypy_cache/
 # ignore pytest cache
 .pytest_cache/
+# db files
+*.db
