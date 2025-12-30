@@ -1,13 +1,13 @@
 from schemas.output import AdvisoryWarning
-from storage.memory import InMemoryAdvisoryMemory
+from storage.sqlite_memory import SQLiteAdvisoryMemory
 from storage.outcomes import SUCCESS, FAILURE
 
 
 def risk_warnings_for_tool(
     tool_name: str,
-    memory: InMemoryAdvisoryMemory,
+    sqlite_memory: SQLiteAdvisoryMemory,
 ) -> list[AdvisoryWarning]:
-    stats = memory.tool_stats(tool_name)
+    stats = sqlite_memory.tool_stats(tool_name)
 
     successes = stats[SUCCESS]
     failures = stats[FAILURE]

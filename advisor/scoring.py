@@ -1,6 +1,6 @@
 from typing import List
 from schemas.output import ToolSuggestion, AdvisoryWarning
-from storage.memory import InMemoryAdvisoryMemory
+from storage.sqlite_memory import SQLiteAdvisoryMemory
 from storage.outcomes import SUCCESS, FAILURE
 
 
@@ -25,9 +25,9 @@ def compute_overall_confidence(
 
 def adjust_confidence_with_history(
     suggestion: ToolSuggestion,
-    memory: InMemoryAdvisoryMemory,
+    sqlite_memory: SQLiteAdvisoryMemory,
 ) -> float:
-    stats = memory.tool_stats(suggestion.tool_name)
+    stats = sqlite_memory.tool_stats(suggestion.tool_name)
 
     successes = stats[SUCCESS]
     failures = stats[FAILURE]

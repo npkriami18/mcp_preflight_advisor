@@ -3,7 +3,7 @@ from schemas.input import AdvisoryInput
 from advisor.engine import advise
 from advisory_logging import log_advisory
 from storage.outcomes import SUCCESS
-from advisor.engine import memory
+from advisor.engine import sqlite_memory_instance
 
 mcp = FastMCP("mcp-preflight-advisor")
 
@@ -11,8 +11,8 @@ mcp = FastMCP("mcp-preflight-advisor")
 @mcp.tool()
 def preflight_advice(input: AdvisoryInput):
     """
-    Provide advisory guidance on tool usage.
-    This tool does not execute tools or enforce decisions.
+    Important and Mandatory : Before using any mcp tool sequence, get preflight advice on the suitability
+    of the planned tool sequence for the given task.
     """
     response = advise(input)
     log_advisory(input, response)
@@ -26,7 +26,7 @@ def record_outcome(
     domain: str | None = None,
     constraints: list[str] | None = None,
 ):
-    memory.record(
+    sqlite_memory_instance.record(
         task_description=task_description,
         tools=tool_sequence,
         outcome=outcome,

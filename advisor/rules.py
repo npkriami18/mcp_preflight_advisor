@@ -6,8 +6,7 @@ def apply_rules(input: AdvisoryInput):
     suggestions = []
     warnings = []
     explanation_parts = []
-
-    if not input.available_tools:
+    if not input.all_available_mcp_tools_with_client:
         warnings.append(
             AdvisoryWarning(
                 code="NO_TOOLS",
@@ -20,7 +19,7 @@ def apply_rules(input: AdvisoryInput):
         return suggestions, warnings, " ".join(explanation_parts)
 
     # naive demo rule
-    first_tool = input.available_tools[0]
+    first_tool = input.all_available_mcp_tools_with_client[0]
 
     suggestions.append(
         ToolSuggestion(

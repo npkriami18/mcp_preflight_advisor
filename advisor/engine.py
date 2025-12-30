@@ -10,7 +10,7 @@ from advisor.similarity import find_similar_tasks
 from storage.memory import InMemoryAdvisoryMemory
 from storage.sqlite_memory import SQLiteAdvisoryMemory
 
-memory = SQLiteAdvisoryMemory()
+sqlite_memory_instance = SQLiteAdvisoryMemory()
 
 
 
@@ -19,14 +19,14 @@ def advise(input: AdvisoryInput) -> AdvisoryResponse:
 
     adjusted = []
     for s in suggestions:
-        adjusted_conf = adjust_confidence_with_history(s, memory)
+        adjusted_conf = adjust_confidence_with_history(s, sqlite_memory_instance)
         adjusted.append(
             s.copy(update={"confidence": adjusted_conf})
         )
     all_warnings = list(warnings)
 
     for s in adjusted:
-        tool_warnings = risk_warnings_for_tool(s.tool_name, memory)
+        tool_warnings = risk_warnings_for_tool(s.tool_name, sqlite_memory_instance)
         all_warnings.extend(tool_warnings)
 
     overall_confidence = compute_overall_confidence(adjusted, all_warnings)
@@ -38,7 +38,7 @@ def advise(input: AdvisoryInput) -> AdvisoryResponse:
         "constraints": input.constraints or [],
     }
 
-    similar = find_similar_tasks(current_task, memory.all_tasks())
+    similar = find_similar_tasks(current_task, sqlite_memory_instance.all_tasks())
 
     evidence_summary = None
     if similar:
